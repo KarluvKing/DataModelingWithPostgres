@@ -134,6 +134,7 @@ time_table_insert = ("""
         weekday
     )
     VALUES (%s, %s, %s, %s, %s, %s, %s)
+    ON CONFLICT (start_time) DO NOTHING
 """)
 
 # FIND SONGS
