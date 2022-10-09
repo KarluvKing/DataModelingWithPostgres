@@ -108,7 +108,6 @@ INPUTS:
 * func the function that will process the file
 """
 
-
 def process_data(cur, conn, filepath, func):
     # get all files matching extension from directory
     all_files = []
@@ -127,6 +126,12 @@ def process_data(cur, conn, filepath, func):
         conn.commit()
         print('{}/{} files processed.'.format(i, num_files))
 
+"""
+It creates the connection with the database and calls the functions to process the files.
+
+INPUTS:
+* No inputs
+"""
 
 def main():
     conn = psycopg2.connect("host=127.0.0.1 dbname=sparkifydb user=student password=student")
