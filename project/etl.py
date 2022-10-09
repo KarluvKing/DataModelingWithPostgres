@@ -4,6 +4,15 @@ import psycopg2
 import pandas as pd
 from sql_queries import *
 
+"""
+This procedure processes a song file whose filepath has been provided as an arugment.
+It extracts the song information in order to store it into the songs table.
+Then it extracts the artist information in order to store it into the artists table.
+
+INPUTS:
+* cur the cursor variable
+* filepath the file path to the song file
+"""
 
 def process_song_file(cur, filepath):
     # open song file
@@ -31,6 +40,16 @@ def process_song_file(cur, filepath):
 
     cur.execute(artist_table_insert, artist_data)
 
+"""
+This procedure processes a log file whose filepath has been provided as an arugment.
+It extracts time data records information in order to store it into the time table.
+It also extracts user data record information in order to store it into the user table.
+In the end extracts song and artists record information in order to store it into songplay table.
+
+INPUTS:
+* cur the cursor variable
+* filepath the file path to the log file
+"""
 
 def process_log_file(cur, filepath):
     # open log file
@@ -76,6 +95,18 @@ def process_log_file(cur, filepath):
         # insert songplay record
         songplay_data = (index, row.ts, row.userId, row.level, songid, artistid, row.sessionId, row.location, row.userAgent)
         cur.execute(songplay_table_insert, songplay_data)
+
+"""
+This procedure processes all json files whose filepath has been provided as an arugment.
+Processes the data from json files whose filepath has been provided as an argument.
+Calls the functions process_song_file and process_log_file to extract the necessary data.
+
+INPUTS:
+* cur the cursor variable
+* filepath the file path to the song file
+* conn database connection atributes
+* func the function that will process the file
+"""
 
 
 def process_data(cur, conn, filepath, func):
