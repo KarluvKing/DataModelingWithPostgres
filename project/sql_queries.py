@@ -54,7 +54,7 @@ longitude float
 
 time_table_create = ("""
 CREATE TABLE IF NOT EXISTS time (
-start_time varchar,
+start_time timestamp PRIMARY KEY NOT NULL,
 hour int,
 day int,
 week int,
